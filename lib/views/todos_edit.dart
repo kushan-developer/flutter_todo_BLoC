@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/cubits/edit_todo_cubit.dart';
 import 'package:todo_app/data/models/todo.dart';
+import 'package:todo_app/widgets/snackbar.dart';
 
 class TodosEdit extends StatelessWidget {
   TodosEdit({Key? key, required this.todo}) : super(key: key);
@@ -20,6 +21,10 @@ class TodosEdit extends StatelessWidget {
         listener: (context, state) {
           if (state is EditTodoComplete) {
             Navigator.pop(context);
+            showSnackBar(context, Colors.green, "Todo saved 🙂");
+            return;
+          } else if (state is EditTodoError) {
+            showSnackBar(context, Colors.red, "Todo was not saved 😕");
             return;
           }
         },

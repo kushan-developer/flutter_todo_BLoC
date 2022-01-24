@@ -3,12 +3,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/assets/constants.dart';
 import 'package:todo_app/cubits/todos_cubit.dart';
 
-class TodosHome extends StatelessWidget {
+class TodosHome extends StatefulWidget {
   const TodosHome({Key? key}) : super(key: key);
 
   @override
+  State<TodosHome> createState() => _TodosHomeState();
+}
+
+class _TodosHomeState extends State<TodosHome> {
+  @override
+  void initState() {
+    final todoProvider = BlocProvider.of<TodosCubit>(context);
+    todoProvider.fetchTodos();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    BlocProvider.of<TodosCubit>(context).fetchTodos();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Todos"),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/assets/constants.dart';
 import 'package:todo_app/cubits/add_todo_cubit.dart';
+import 'package:todo_app/widgets/snackbar.dart';
 
 class TodosAdd extends StatelessWidget {
   TodosAdd({Key? key}) : super(key: key);
@@ -18,6 +19,7 @@ class TodosAdd extends StatelessWidget {
         listener: (context, state) {
           if (state is AddTodoComplete) {
             Navigator.pop(context);
+            showSnackBar(context, Colors.green, "Todo added 🙂");
             return;
           }
         },
